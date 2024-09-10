@@ -1,0 +1,9 @@
+@tailwind base; /* นำเข้า base styles ของ Tailwind */
+@tailwind components; /* นำเข้า component styles ของ Tailwind */
+@tailwind utilities; /* นำเข้า utility styles ของ Tailwind */
+ 
+html,
+body,
+:root {
+  height: 100%; /* กำหนดความสูงของ html, body และ root element เป็น 100% */
+}
