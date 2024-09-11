@@ -1,14 +1,14 @@
 "use client"; // บอกว่า component นี้รันบน client-side
 
-import { UserButton, useUser } from "@clerk/nextjs"; // นำเข้า UserButton และ useUser จาก @clerk/nextjs สำหรับการจัดการผู้ใช้
-import Image from "next/image"; // นำเข้า Image component จาก next/image สำหรับการแสดงรูปภาพ
-import Link from "next/link"; // นำเข้า Link จาก next/link สำหรับการนำทางภายในแอป
-import { useState } from "react"; // นำเข้า useState สำหรับการจัดการ state
-import { usePathname } from "next/navigation"; // นำเข้า usePathname สำหรับการดึงเส้นทาง URL ปัจจุบัน
-import { Menu } from "lucide-react"; // นำเข้าไอคอน Menu จาก lucide-react
+import { UserButton, useUser } from "@clerk/nextjs";
+import Image from "next/image"; 
+import Link from "next/link";
+import { useState } from "react";
+import { usePathname } from "next/navigation"; 
+import { Menu } from "lucide-react";
+import { navLinks } from "@/lib/constants";
+import { usecheckRole } from "@/utils/roles";
 
-import { navLinks } from "@/lib/constants"; // นำเข้า navLinks จาก constants สำหรับแสดงลิงก์นำทาง
-import { usecheckRole } from "@/utils/roles"; // นำเข้า usecheckRole จาก roles สำหรับตรวจสอบบทบาทของผู้ใช้
 
 // ฟังก์ชัน TopBar สำหรับแสดงแถบเมนูด้านบนของแอป
 const TopBar = () => {
