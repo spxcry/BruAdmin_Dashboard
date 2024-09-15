@@ -11,7 +11,7 @@ export const POST = async (req: NextRequest) => {
 
     // ถ้าผู้ใช้ไม่ได้ล็อกอิน ให้ส่งสถานะ 401 (Unauthorized)
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("ไม่ได้รับอนุญาต", { status: 401 });
     }
 
     // เชื่อมต่อกับฐานข้อมูล
@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest) => {
 
     // ตรวจสอบว่ามีข้อมูล title, description, และ media ครบถ้วนหรือไม่
     if (!title || !description || !media) {
-      return new NextResponse("Not enough data to create a collection", { status: 400 });
+      return new NextResponse("ไม่มีข้อมูลที่จะสร้างคอลเลกชัน", { status: 400 });
     }
 
     // สร้างคอลเลคชั่นใหม่ในฐานข้อมูล
@@ -40,6 +40,8 @@ export const POST = async (req: NextRequest) => {
     return new NextResponse("Internal Error", { status: 500 });
   }
 };
+
+
 
 // GET API สำหรับการดึงข้อมูลคอลเลคชั่น (เพิ่มการแบ่งหน้า)
 export const GET = async (req: NextRequest) => {
@@ -68,7 +70,7 @@ export const GET = async (req: NextRequest) => {
   } catch (err) {
     // แสดง error ในกรณีที่เกิดข้อผิดพลาด
     console.log("[collections_GET]", err);
-    return new NextResponse("Internal Error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดภายในระบบ", { status: 500 });
   }
 };
 

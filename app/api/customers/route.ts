@@ -22,7 +22,9 @@ export const POST = async (req: NextRequest) => {
 
     // ตรวจสอบว่ามีข้อมูล title, description, และ media ครบถ้วนหรือไม่
     if (!title || !description || !media) {
-      return new NextResponse("Not enough data to create a customer", { status: 400 });
+      return new NextResponse("Not enough data to create a customer", {
+        status: 400,
+      });
     }
 
     // สร้างลูกค้าใหม่ในฐานข้อมูล
@@ -64,7 +66,10 @@ export const GET = async (req: NextRequest) => {
     const totalPages = Math.ceil(totalCustomers / limit); // คำนวณจำนวนหน้าทั้งหมด
 
     // ส่งค่ากลับไปให้ client รวมถึงข้อมูลลูกค้า จำนวนทั้งหมด และจำนวนหน้าทั้งหมด
-    return NextResponse.json({ customers, totalCustomers, totalPages }, { status: 200 });
+    return NextResponse.json(
+      { customers, totalCustomers, totalPages },
+      { status: 200 }
+    );
   } catch (err) {
     // แสดงข้อผิดพลาดในกรณีที่เกิดข้อผิดพลาด
     console.log("[customer_GET]", err);

@@ -20,7 +20,7 @@ export const GET = async (req: NextRequest, { params }: { params: { collectionId
 
     // ถ้าไม่พบคอลเลคชั่น ให้ตอบกลับด้วยสถานะ 404
     if (!collection) {
-      return new NextResponse(JSON.stringify({ message: "Collection not found" }), { status: 404 });
+      return new NextResponse(JSON.stringify({ message: "ไม่พบคอลเล็กชัน" }), { status: 404 });
     }
 
     // ถ้าพบคอลเลคชั่น ให้ตอบกลับด้วยข้อมูลคอลเลคชั่นและสถานะ 200
@@ -35,7 +35,7 @@ export const GET = async (req: NextRequest, { params }: { params: { collectionId
   } catch (err) {
     // ถ้ามีข้อผิดพลาด ให้แสดงใน console และตอบกลับด้วยสถานะ 500
     console.log("[collectionId_GET]", err);
-    return new NextResponse("Internal error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดภายในระบบ", { status: 500 });
   }
 };
 
@@ -46,7 +46,7 @@ export const POST = async (req: NextRequest, { params }: { params: { collectionI
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("ไม่ได้รับอนุญาต", { status: 401 });
     }
 
     // เชื่อมต่อกับฐานข้อมูล
@@ -57,7 +57,7 @@ export const POST = async (req: NextRequest, { params }: { params: { collectionI
 
     // ถ้าไม่พบคอลเลคชั่น ให้ตอบกลับด้วยสถานะ 404
     if (!collection) {
-      return new NextResponse(JSON.stringify({ message: "Collection not found" }), { status: 404 });
+      return new NextResponse(JSON.stringify({ message: "ไม่พบคอลเล็กชัน" }), { status: 404 });
     }
 
     // ดึงข้อมูล title, description, media จาก body ของคำขอ
@@ -65,7 +65,7 @@ export const POST = async (req: NextRequest, { params }: { params: { collectionI
 
     // ตรวจสอบว่ามีข้อมูลที่จำเป็นครบถ้วนหรือไม่
     if (!title || !description || !media) {
-      return new NextResponse("Not enough data to update the collection", { status: 400 });
+      return new NextResponse("ข้อมูลไม่เพียงพอที่จะอัปเดตคอลเลกชัน", { status: 400 });
     }
 
     // อัปเดตข้อมูลคอลเลคชั่น
@@ -83,7 +83,7 @@ export const POST = async (req: NextRequest, { params }: { params: { collectionI
   } catch (err) {
     // ถ้ามีข้อผิดพลาด ให้แสดงใน console และตอบกลับด้วยสถานะ 500
     console.log("[collectionId_POST]", err);
-    return new NextResponse("Internal error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดภายในระบบ", { status: 500 });
   }
 };
 
@@ -94,7 +94,7 @@ export const DELETE = async (req: NextRequest, { params }: { params: { collectio
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("ไม่ได้รับอนุญาต", { status: 401 });
     }
 
     // เชื่อมต่อกับฐานข้อมูล
@@ -105,18 +105,18 @@ export const DELETE = async (req: NextRequest, { params }: { params: { collectio
 
     // ถ้าไม่พบคอลเลคชั่น ให้ตอบกลับด้วยสถานะ 404
     if (!collection) {
-      return new NextResponse(JSON.stringify({ message: "Collection not found" }), { status: 404 });
+      return new NextResponse(JSON.stringify({ message: "ไม่พบคอลแลคชัน" }), { status: 404 });
     }
 
     // ลบคอลเลคชั่น
     await Collection.findByIdAndDelete(collection._id);
 
     // ตอบกลับด้วยข้อความว่าคอลเลคชั่นถูกลบแล้วและสถานะ 200
-    return new NextResponse(JSON.stringify({ message: "Collection deleted" }), { status: 200 });
+    return new NextResponse(JSON.stringify({ message: "ลบคอลเล็กชันแล้ว" }), { status: 200 });
   } catch (err) {
     // ถ้ามีข้อผิดพลาด ให้แสดงใน console และตอบกลับด้วยสถานะ 500
     console.log("[collectionId_DELETE]", err);
-    return new NextResponse("Internal error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดภายในระบบ", { status: 500 });
   }
 };
 
