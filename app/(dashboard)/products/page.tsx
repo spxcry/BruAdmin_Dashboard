@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,11 +26,13 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         alt={product.title}
         className="w-24 h-24 sm:w-36 sm:h-36 object-cover rounded-lg mb-3"
       />
-      <h2 className="text-md sm:text-lg font-semibold text-gray-800 mb-2">{product.title}</h2>
+      <h2 className="text-md sm:text-lg font-semibold text-gray-800 mb-2">
+        {product.title}
+      </h2>
       <div className="flex items-center justify-center mb-3">
         <button
           className={`px-3 py-1 text-sm rounded-full text-white font-semibold ${
-            sum === 0 ? 'bg-red-500' : 'bg-green-500'
+            sum === 0 ? "bg-red-500" : "bg-green-500"
           }`}
         >
           {quantityLabel}
@@ -76,7 +78,9 @@ const Products = () => {
   ) : (
     <div className="px-4 sm:px-10 py-5 bg-gray-100 min-h-screen">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-heading3-bold font-bold text-gray-800">สต๊อกสินค้า</h1>
+        <h1 className="text-heading3-bold font-bold text-gray-800">
+          สต๊อกสินค้า
+        </h1>
         <Button
           className="bg-purple-500 text-white px-3 sm:px-4 py-2 rounded-md shadow-md hover:bg-purple-600 transition-transform duration-300 ease-in-out"
           onClick={() => router.push("/products/new")}
