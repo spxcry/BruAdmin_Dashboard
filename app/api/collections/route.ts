@@ -9,7 +9,7 @@ export const POST = async (req: NextRequest) => {
     // ตรวจสอบการยืนยันตัวตนของผู้ใช้
     const { userId } = auth();
 
-    // ถ้าผู้ใช้ไม่ได้ล็อกอิน ให้ส่งสถานะ 401 (Unauthorized)
+    // ถ้าผู้ใช้ไม่ได้ล็อกอิน ให้ส่งสถานะ 401 (ไม่ได้รับอนุญาต)
     if (!userId) {
       return new NextResponse("ไม่ได้รับอนุญาต", { status: 401 });
     }

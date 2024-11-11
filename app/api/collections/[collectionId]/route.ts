@@ -4,10 +4,9 @@ import Collection from "@/lib/models/Collection";
 import { connectToDB } from "@/lib/mongoDB";
 // นำเข้า auth จาก "@clerk/nextjs" สำหรับตรวจสอบการยืนยันตัวตน
 import { auth } from "@clerk/nextjs";
-
-
 // นำเข้า NextRequest และ NextResponse จาก "next/server" สำหรับจัดการคำขอและการตอบสนอง
 import { NextRequest, NextResponse } from "next/server";
+
 
 // ฟังก์ชัน GET สำหรับดึงข้อมูลคอลเลคชั่นโดยใช้ collectionId
 export const GET = async (req: NextRequest, { params }: { params: { collectionId: string } }) => {
@@ -38,6 +37,7 @@ export const GET = async (req: NextRequest, { params }: { params: { collectionId
     return new NextResponse("ข้อผิดพลาดภายในระบบ", { status: 500 });
   }
 };
+
 
 // ฟังก์ชัน POST สำหรับอัปเดตข้อมูลคอลเลคชั่น
 export const POST = async (req: NextRequest, { params }: { params: { collectionId: string } }) => {
@@ -86,6 +86,8 @@ export const POST = async (req: NextRequest, { params }: { params: { collectionI
     return new NextResponse("ข้อผิดพลาดภายในระบบ", { status: 500 });
   }
 };
+
+
 
 // ฟังก์ชัน DELETE สำหรับลบคอลเลคชั่น
 export const DELETE = async (req: NextRequest, { params }: { params: { collectionId: string } }) => {

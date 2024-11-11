@@ -9,9 +9,9 @@ export const POST = async (req: NextRequest) => {
     // ตรวจสอบการยืนยันตัวตนของผู้ใช้
     const { userId } = auth();
 
-    // ถ้าผู้ใช้ไม่ได้รับอนุญาต ให้ส่งสถานะ 401 (Unauthorized)
+    // ถ้าผู้ใช้ไม่ได้รับอนุญาต ให้ส่งสถานะ 401 (ไม่ได้รับอนุญาต)
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("ไม่ได้รับอนุญาต", { status: 401 });
     }
 
     // เชื่อมต่อกับฐานข้อมูล
@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest) => {
 
     // ใช้ sum === undefined แทนการเช็ค !sum เพื่อป้องกันการปฏิเสธค่า 0
     if (!title || !description || !media || sum === undefined || !price) {
-      return new NextResponse("Not enough data to create a product", { status: 400 });
+      return new NextResponse("ข้อมูลไม่เพียงพอในการสร้างสินค้า", { status: 400 });
     }
 
     // สร้างสินค้าขึ้นในฐานข้อมูล
@@ -40,7 +40,7 @@ export const POST = async (req: NextRequest) => {
   } catch (err) {
     // แสดงข้อผิดพลาดในกรณีที่เกิดข้อผิดพลาด
     console.log("[products_POST]", err);
-    return new NextResponse("Internal Error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดในระบบ", { status: 500 });
   }
 };
 
@@ -71,7 +71,7 @@ export const GET = async (req: NextRequest) => {
   } catch (err) {
     // แสดงข้อผิดพลาดในกรณีที่เกิดข้อผิดพลาด
     console.log("[products_GET]", err);
-    return new NextResponse("Internal Error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดในระบบ", { status: 500 });
   }
 };
 

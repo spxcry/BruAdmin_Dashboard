@@ -14,7 +14,7 @@ export const GET = async (req: NextRequest, { params }: { params: { productId: s
 
     // ถ้าไม่พบสินค้า ให้ตอบกลับด้วยสถานะ 404
     if (!product) {
-      return new NextResponse(JSON.stringify({ message: "Product not found" }), { status: 404 });
+      return new NextResponse(JSON.stringify({ message: "ไม่พบสินค้า" }), { status: 404 });
     }
 
     // ถ้าพบสินค้า ให้ตอบกลับด้วยข้อมูลสินค้าและสถานะ 200
@@ -29,7 +29,7 @@ export const GET = async (req: NextRequest, { params }: { params: { productId: s
   } catch (err) {
     // แสดงข้อผิดพลาดในกรณีที่เกิดข้อผิดพลาด
     console.log("[productId_GET]", err);
-    return new NextResponse("Internal error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดในระบบ", { status: 500 });
   }
 };
 
@@ -39,9 +39,9 @@ export const POST = async (req: NextRequest, { params }: { params: { productId: 
     // ตรวจสอบการยืนยันตัวตนของผู้ใช้
     const { userId } = auth();
 
-    // ถ้าผู้ใช้ไม่ได้รับอนุญาต ให้ส่งสถานะ 401 (Unauthorized)
+    // ถ้าผู้ใช้ไม่ได้รับอนุญาต ให้ส่งสถานะ 401 (ไม่ได้รับอนุญาต)
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("ไม่ได้รับอนุญาต", { status: 401 });
     }
 
     // เชื่อมต่อฐานข้อมูล
@@ -52,7 +52,7 @@ export const POST = async (req: NextRequest, { params }: { params: { productId: 
 
     // ถ้าไม่พบสินค้า ให้ตอบกลับด้วยสถานะ 404
     if (!product) {
-      return new NextResponse(JSON.stringify({ message: "Product not found" }), { status: 404 });
+      return new NextResponse(JSON.stringify({ message: "ไม่พบสินค้า" }), { status: 404 });
     }
 
     // แก้ไขการตรวจสอบ sum เพื่อให้รองรับ sum ที่เป็น 0
@@ -60,7 +60,7 @@ export const POST = async (req: NextRequest, { params }: { params: { productId: 
 
     // ตรวจสอบว่ามีข้อมูลที่จำเป็นครบถ้วนหรือไม่
     if (!title || !description || !media || sum === undefined || !price) {
-      return new NextResponse("Not enough data to update the product", { status: 400 });
+      return new NextResponse("ข้อมูลไม่เพียงพอที่จะอัปเดตสินค้า", { status: 400 });
     }
 
     // อัปเดตข้อมูลสินค้า
@@ -78,7 +78,7 @@ export const POST = async (req: NextRequest, { params }: { params: { productId: 
   } catch (err) {
     // แสดงข้อผิดพลาดในกรณีที่เกิดข้อผิดพลาด
     console.log("[productId_POST]", err);
-    return new NextResponse("Internal error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดในระบบ", { status: 500 });
   }
 };
 
@@ -88,9 +88,9 @@ export const DELETE = async (req: NextRequest, { params }: { params: { productId
     // ตรวจสอบการยืนยันตัวตนของผู้ใช้
     const { userId } = auth();
 
-    // ถ้าผู้ใช้ไม่ได้รับอนุญาต ให้ส่งสถานะ 401 (Unauthorized)
+    // ถ้าผู้ใช้ไม่ได้รับอนุญาต ให้ส่งสถานะ 401 (ไม่ได้รับอนุญาต)
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("ไม่ได้รับอนุญาต", { status: 401 });
     }
 
     // เชื่อมต่อฐานข้อมูล
@@ -101,18 +101,18 @@ export const DELETE = async (req: NextRequest, { params }: { params: { productId
 
     // ถ้าไม่พบสินค้า ให้ตอบกลับด้วยสถานะ 404
     if (!product) {
-      return new NextResponse(JSON.stringify({ message: "Product not found" }), { status: 404 });
+      return new NextResponse(JSON.stringify({ message: "ไม่พบสินค้า" }), { status: 404 });
     }
 
     // ลบสินค้าตาม productId
     await Product.findByIdAndDelete(product._id);
 
     // ส่งข้อความกลับไปว่าได้ลบสินค้าแล้วพร้อมสถานะ 200
-    return new NextResponse(JSON.stringify({ message: "Product deleted" }), { status: 200 });
+    return new NextResponse(JSON.stringify({ message: "ลบสินค้า" }), { status: 200 });
   } catch (err) {
     // แสดงข้อผิดพลาดในกรณีที่เกิดข้อผิดพลาด
     console.log("[productId_DELETE]", err);
-    return new NextResponse("Internal error", { status: 500 });
+    return new NextResponse("ข้อผิดพลาดในระบบ", { status: 500 });
   }
 };
 

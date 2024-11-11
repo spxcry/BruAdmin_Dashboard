@@ -19,7 +19,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
         <TotalCollection /> {/* แสดงจำนวนคอลเลคชั่น */}
         <TotalCustomer /> {/* แสดงจำนวนลูกค้า */}
-        <TotalProduct /> {/* แสดงจำนวนสินค้า */}
+        <TotalProduct /> {/* แสดงจำนวนสินค้าทั้งหมด */}
       </div>
       
       <div className="bg-white shadow-xl rounded-lg p-8">
